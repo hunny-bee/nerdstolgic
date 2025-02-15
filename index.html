@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nerdstolgic</title>
+    <link rel="icon" href="images/Nerdstolgic favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/Nerdstolgic favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #2A3133;
+            --medium-bg: #606364;
+            --light-bg: #ABA4AA;
+            --text-color: #FFFFFF;
+            --accent-color: #f4ebbc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .shiny-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shiny-bg::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 25%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 255, 255, 0.05) 75%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            transform: rotate(30deg);
+            animation: shine 6s linear infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateY(-100%) translateX(-100%) rotate(30deg);
+            }
+            100% {
+                transform: translateY(100%) translateX(100%) rotate(30deg);
+            }
+        }
+
+        .value-add h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .value-points {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+        }
+
+        .value-point {
+            flex: 1 1 300px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .value-point:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-point h3 {
+            color: #424b52;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .value-point p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+
+        header {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        a{
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+
+        .banner {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--dark-bg);
+        }
+
+        .carousel {
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            color: var(--light-bg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .carousel-item:nth-child(1) {
+            background-color: #e6f2ff;
+            background-image: url('images/food\ aid.jpg');
+        }
+
+        .carousel-item:nth-child(2) {
+            background-color: #fff2e6;
+            background-image: url('images/teddy\ bear.jpg');
+        }
+
+        .carousel-item:nth-child(3) {
+            background-color: #e6ffe6;
+            background-image: url('images/mahatma\ gandhi.jpg');
+        }
+
+        .carousel-item h1,
+        .carousel-item p,
+        .carousel-item .organization {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-item h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .carousel-item p {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+                .organization h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .cta-button {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--light-bg);
+            color: var(--dark-bg);
+        }
+
+        .key-features, .apps, .value-add, .team {
+            padding: 5rem 10%;
+        }
+
+        .key-features, .team {
+            background-color: var(--medium-bg);
+        }
+
+        .apps, .value-add {
+            background-color: var(--dark-bg);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        .key-features {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+        }
+
+        .key-features h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            flex-basis: calc(33.333% - 30px);
+            min-width: 250px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature i {
+            font-size: 2.5em;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .feature:hover i {
+            transform: translateY(-5px);
+        }
+
+        .feature h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .feature:nth-child(1) i { color: #FF6B6B; } 
+        .feature:nth-child(2) i { color: #4ECDC4; } 
+        .feature:nth-child(3) i { color: #FED766; } 
+        .feature:nth-child(4) i { color: #A86ED4; } 
+        .feature:nth-child(5) i { color: #64B6AC; } 
+
+        .feature:hover:nth-child(1) i { color: #FF8E8E; } 
+        .feature:hover:nth-child(2) i { color: #6FF2E9; } 
+        .feature:hover:nth-child(3) i { color: #FFEB99; } 
+        .feature:hover:nth-child(4) i { color: #C797E5; } 
+        .feature:hover:nth-child(5) i { color: #89D9CF; } 
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .app-item {
+            text-align: center;
+        }
+
+        .app-item img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .value-points {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .value-point {
+            flex-basis: calc(33.33% - 1rem);
+            text-align: center;
+        }
+
+        .team {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .team h2 {
+            margin-bottom: 30px;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .team-member {
+            width: calc(25% - 30px); 
+            max-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .member-image {
+            width: 100%;
+            padding-top: 125%; 
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .member-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .team-member p {
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .linkedin-icon {
+            color: #0077b5; 
+            font-size: 24px;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .linkedin-icon:hover {
+            color: #00669c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--dark-bg);
+        }
+
+        @media (max-width: 1200px) {
+            .team-member {
+                width: calc(33.333% - 30px); 
+            }
+        }
+
+        @media (max-width: 900px) {
+            .team-member {
+                width: calc(50% - 30px); 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-container, .app-grid, .value-points, .team-members {
+                flex-direction: column;
+            }
+
+            .feature {
+                flex-basis: calc(50% - 30px);
+            }
+
+            .glassmorphism {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .value-points {
+                flex-direction: column;
+            }
+
+            .value-point {
+                flex-basis: 100%;
+            }
+
+            .carousel-item h1 {
+                font-size: 2rem;
+            }
+
+            .carousel-item p,
+            .organization h3 {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 0.8rem 1.6rem;
+            }
+
+            .nav-links {
+                position: absolute;
+                right: 0px;
+                height: 92vh;
+                top: 8vh;
+                background-color: rgba(255, 255, 255, 0.9);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                margin: 1rem 0;
+            }
+
+            .burger {
+                display: block;
+            }
+
+        }
+
+        .nav-active {
+            transform: translateX(0%);
+        }
+
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .team-member {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .member-image {
+                padding-top: 100%; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature {
+                flex-basis: 100%;
+            }
+
+            .glassmorphism {
+                padding: 1rem;
+            }
+
+            .value-add h2 {
+                font-size: 1.5rem;
+            }
+
+            .value-point h3 {
+                font-size: 1.2rem;
+            }
+
+            .value-point p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="glassmorphism">
+            <div class="logo"><a href="#home">NERDSTOLGIC</a></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#apps">Apps</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="banner shiny-bg">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <h1>Simplify Your Donation Management</h1>
+                    <p>Focus on creating a positive impact; our software takes care of the small details, automating key tasks, simplifying driver routes, and offering real-time inventory tracking. The system guarantees smooth operations and strengthens community ties for everyone involved, from administrators to donors.</p>
+                </div>
+
+                <div class="carousel-item">
+                    <h1>Organizations We've Worked With:</h1>
+                    <div class="organization">
+                        <h3>The Teddy Bear Foundation</h3>
+                        <p>The Teddy Bear Foundation is dedicated to providing care, support, and therapy to children who have been abused or neglected. Through counseling services, legal assistance, and community outreach, the foundation works to create a safe and nurturing environment for vulnerable children, ensuring they receive the help they need to heal and thrive.</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <h1>Join the Future of Giving</h1>
+                    <p>"The best way to find yourself is to lose yourself in the service of others" - Mahatma Gandhi</p>
+                </div>
+            </div>
+            <button class="cta-button" onclick="scrollToSection('apps')">Explore Our Apps</button>
+        </section>
+
+        <section id="features" class="key-features">
+            <h2>Key Features</h2>
+            <div class="features-container">
+                <div class="feature">
+                    <i class="fa-solid fa-id-card"></i>
+                    <h3>Automated Driver Scheduling</h3>
+                    <p>Dynamically assigns drivers for high-value pick-ups and coordinates inter-center item transfers based on inventory needs.</p>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-timeline"></i>
+                    <h3>Real-Time Donation Tracking</h3>
+                    <p>Allows users to monitor the status of donations in real time, creating a transparent experience.</p>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-warehouse"></i>
+                    <h3>Inventory Management Dashboard</h3>
+                    <p>Enables admins to track donations, verify incoming items, and manage distribution from a centralized interface.</p>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-truck-moving"></i>
+                    <h3>Route Optimization for Drivers</h3>
+                    <p>Provides real-time, shortest-path navigation to donor or volunteer addresses.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Data-Driven Decision Making</h3>
+                    <p>Empowers organizations to manage their inventory proactively with real-time data on inventory levels and donation trends</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="apps" class="apps shiny-bg">
+            <h2>Explore Our Mobile and Web App</h2>
+            <div class="app-grid">
+                <div class="app-item">
+                    <img src="images/mobile1.png" alt="Donation Categories">
+                    <p>Choose the type of items you want to donate, from food to clothing and more.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/mobile2.png" alt="Select Donation Item">
+                    <p>Pick specific items from your inventory that you wish to donate.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/mobile4.png" alt="Track Donation">
+                    <p>Monitor the status of your donation from pickup to delivery at the center.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/manage inventory.png" alt="Manage Inventory">
+                    <p>View and organize donated items to ensure accurate stock levels and distribution.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/product distribution.png" alt="Product Distribution">
+                    <p>See which items are frequently distributed at specific centers and what is needed most.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/centre donations.png" alt="Centre Donations">
+                    <p>Track which centers receive the most donations and adjust contributions accordingly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="value-add glassmorphism shiny-bg">
+            <h2>How will it add value to you?</h2>
+            <div class="value-points">
+                <div class="value-point">
+                    <h3>Improved Inventory Oversight for Admins</h3>
+                    <p>Allows admins to verify donations and manage inventory efficiently, addressing community needs effectively.</p>
+                </div>
+                <div class="value-point">
+                    <h3>Automated Resource Allocation</h3>
+                    <p>Ensures high-value donations are prioritized for collection while facilitating inter-center transfers based on demand.</p>
+                </div>
+                <div class="value-point">
+                    <h3>Increased Community Engagement</h3>
+                    <p>The app acts as a bridge between donors, volunteers, and charities, fostering long-term relationships and ongoing community support.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="team">
+            <h2>Our Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/Bonolo Moraka (2).jpg" alt="Bonolo Moraka">
+                    </div>
+                    <h3>Bonolo Moraka</h3>
+                    <p>Skilled programmer with expertise in web development, mobile apps, and databases.</p>
+                    <a href="https://www.linkedin.com/in/bonolo-moraka-13b87918b/" class="linkedin-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/Okuhle Ntakana.jpeg" alt="Okuhle Ntakana">
+                    </div>
+                    <h3>Okuhle Ntakana</h3>
+                    <p>Full stack developer, aspiring software engineer</p>
+                    <a href="https://www.linkedin.com/in/okuhle-ntakana-739a222ab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="linkedin-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/Bridget Mashanya.JPG" alt="Bridget Mashanya">
+                    </div>
+                    <h3>Bridget Mashanya</h3>
+                    <p>Passionate tech enthusiast skilled in programming, problem-solving, and innovation.</p>
+                    <a href="https://www.linkedin.com/in/mashanya-bridget-7b307b295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="linkedin-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="images/Sandile Sithole.jpeg" alt="Sandile Sithole">
+                    </div>
+                    <h3>Sandile Sithole</h3>
+                    <p>Eager to learn, with skills in documentation, mobile development, and database design.</p>
+                    <a href="https://www.linkedin.com/in/sandile-sithole-76761923b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="linkedin-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="shiny-bg">
+        <p>&copy; 2024 Nerdstolgic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+       
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        let currentItem = 0;
+
+        function showNextItem() {
+            carouselItems[currentItem].classList.remove('active');
+            currentItem = (currentItem + 1) % carouselItems.length;
+            carouselItems[currentItem].classList.add('active');
+        }
+
+        
+        carouselItems[0].classList.add('active');
+
+        
+        setInterval(showNextItem, 10000);
+
+        
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('glassmorphism');
+            } else {
+                header.classList.remove('glassmorphism');
+            }
+        });
+
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('href').substring(1);
+                scrollToSection(sectionId);
+            });
+        });
+
+        
+        const ctaButton = document.querySelector('.cta-button');
+        if (ctaButton) {
+            ctaButton.addEventListener('click', function () {
+                scrollToSection('apps');
+            });
+        }
+        });
+
+        const navSlide = () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+
+                burger.classList.toggle('toggle');
+            });
+        }
+
+        navSlide();
+
+    </script>
+</body>
+</html>
