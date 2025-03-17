@@ -4,7 +4,7 @@
 ![Main Screenshot](screenshots/main-desktop.png)  
 
 ## 📌 Overview  
-This **advertisement website** was solely developed by **Bonolo Moraka** for **Team Nerdstolgic** as part of the **Informatics 3** course at the **University of Johannesburg**.  
+This [**advertisement website**](https://nerdstolgic.netlify.app/) was solely developed by **Bonolo Moraka** for **Team Nerdstolgic** as part of the **Informatics 3** course at the **University of Johannesburg**.  
 
 The website showcases **Team Nerdstolgic's** project, a **Donation Management System** created for the [**Teddy Bear Foundation**](https://teddybearfoundation.org.za/), which aims to streamline the donation process by allowing users to:  
 ✅ Make physical donations securely from the comfort of their homes.  
